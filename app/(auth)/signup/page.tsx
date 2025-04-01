@@ -3,7 +3,8 @@ import React from 'react'
 
 const Signup = () => {
   return (
-    <AuthForm type="sign-up" />
+    // <AuthForm type="sign-up" />
+    <div className="">signup</div>
   )
 }
 
