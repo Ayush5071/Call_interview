@@ -60,8 +60,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
           password,
         });
 
-        if (!result.success) {
-          toast.error(result.message);
+        if (!result?.success) {
+          toast.error(result?.message);
           return;
         }
 
