@@ -6,23 +6,23 @@ import { Button } from "./ui/button";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
 import DisplayTechIcons from "./DisplayTechIcons";
-// import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import { getFeedbackByid } from "@/lib/actions/general.action";
 
 const InterviewCard = async ({
-  interviewId,
+  id,
   userId,
   role,
   type,
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-//   const feedback =
-//     userId && interviewId
-//       ? await getFeedbackByInterviewId({
-//           interviewId,
-//           userId,
-//         })
-//       : null;
+  const feedback =
+    userId && id
+      ? await getFeedbackByid({
+          id,
+          userId,
+        })
+      : null;
 
   const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 
@@ -34,7 +34,7 @@ const InterviewCard = async ({
     }[normalizedType] || "bg-light-600";
 
   const formattedDate = dayjs(
-    // feedback?.createdAt || 
+    feedback?.createdAt || 
     createdAt || Date.now()
   ).format("MMM D, YYYY");
 
@@ -78,30 +78,30 @@ const InterviewCard = async ({
 
             <div className="flex flex-row gap-2 items-center">
               <Image src="/star.svg" width={22} height={22} alt="star" />
-              {/* <p>{feedback?.totalScore || "---"}/100</p> */}
+              <p>{feedback?.totalScore || "---"}/100</p>
             </div>
           </div>
 
           {/* Feedback or Placeholder Text */}
-          {/* <p className="line-clamp-2 mt-5">
+          <p className="line-clamp-2 mt-5">
             {feedback?.finalAssessment ||
               "You haven't taken this interview yet. Take it now to improve your skills."}
-          </p> */}
+          </p>
         </div>
 
         <div className="flex flex-row justify-between">
           <DisplayTechIcons techStack={techstack} />
 
           <Button className="btn-primary">
-            {/* <Link
+            <Link
               href={
                 feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
+                  ? `/interview/${id}/feedback`
+                  : `/interview/${id}`
               }
             >
               {feedback ? "Check Feedback" : "View Interview"}
-            </Link> */}
+            </Link>
           </Button>
         </div>
       </div>
