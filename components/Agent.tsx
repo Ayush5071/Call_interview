@@ -89,14 +89,14 @@ const Agent = ({
     const handleGenerateFeedback = async (messages: SavedMessage[]) => {
       console.log("handleGenerateFeedback");
 
-      const { success, feedbackId: id } = await createFeedback({
+      const feedbackResult = await createFeedback({
         interviewId: interviewId!,
         userId: userId!,
         transcript: messages,
         feedbackId,
       });
 
-      if (success && id) {
+      if (feedbackResult && feedbackResult.success && feedbackResult.feedbackId) {
         router.push(`/interview/${interviewId}/feedback`);
       } else {
         console.log("Error saving feedback");

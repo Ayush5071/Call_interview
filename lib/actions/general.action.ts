@@ -8,6 +8,7 @@ import { feedbackSchema } from "@/constants";
 
 export async function createFeedback(params: CreateFeedbackParams) {
   const { interviewId, userId, transcript, feedbackId } = params;
+  if(!userId) return null;
 
   try {
     const formattedTranscript = transcript
@@ -76,6 +77,7 @@ export async function getFeedbackByid(
   params: GetFeedbackByInterviewIdParams
 ): Promise<Feedback | null> {
   const { id, userId } = params;
+  if(!userId) return null;
 
   const querySnapshot = await db
     .collection("feedback")
@@ -94,6 +96,7 @@ export async function getLatestInterviews(
   params: GetLatestInterviewsParams
 ): Promise<Interview[] | null> {
   const { userId, limit = 20 } = params;
+  if(!userId) return null;
 
   const interviews = await db
     .collection("interviews")
@@ -112,6 +115,7 @@ export async function getLatestInterviews(
 export async function getInterviewsByUserId(
   userId: string
 ): Promise<Interview[] | null> {
+    if(!userId) return null;
   const interviews = await db
     .collection("interviews")
     .where("userId", "==", userId)

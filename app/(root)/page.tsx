@@ -6,6 +6,8 @@ import { getCurrentUser } from "@/lib/actions/auth.action";
 import InterviewCard from "@/components/InterviewCards";
 import { getInterviewsByUserId, getLatestInterviews } from "@/lib/actions/general.action";
 
+export const dynamic = 'force-dynamic';
+
 async function Home() {
   const user = await getCurrentUser();
 
